@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevBeeZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.10.0"
+  }
+}
+</script>
+<style>
+  :root {
+    --bg-primary: #0A092D;
+    --bg-secondary: #100F3A;
+    --text-primary: #E0E0E0;
+    --text-secondary: #A0A0C0;
+    --accent-cyan: #00E5FF;
+    --accent-purple: #C566FF;
+    --accent-amber: #FFBF00;
+    --accent-rose: #FF4D8B;
+    --accent-indigo: #8C7CFF;
+    --border-color: rgba(0, 229, 255, 0.2);
+    --glow-cyan: 0 0 8px rgba(0, 229, 255, 0.4), 0 0 16px rgba(0, 229, 255, 0.2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    background-image: 
+      radial-gradient(var(--border-color) 1px, transparent 1px),
+      radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: 
+      radial-gradient(circle at 15% 20%, hsla(230, 90%, 55%, 0.15), transparent 35%),
+      radial-gradient(circle at 85% 75%, hsla(190, 100%, 50%, 0.2), transparent 40%);
+    animation: backgroundPulse 15s ease-in-out infinite;
+  }
+
+
+  @keyframes backgroundPulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+
+  /* Shared Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pulse {
+    50% { opacity: .7; }
+  }
+  @keyframes listening-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+  }
+
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .animate-fade-in-fast {
+      animation: fadeIn 0.4s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0;
+  }
+  .animate-pulse-slow {
+      animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Staggered animation wrapper */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb {
+    background-color: #334155;
+    border-radius: 20px;
+    border: 2px solid var(--bg-primary);
+  }
+  ::-webkit-scrollbar-thumb:hover { background-color: var(--accent-cyan); }
+</style>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="antialiased font-sans">
+    <div id="root"></div>
+    <script src="/env.js"></script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
