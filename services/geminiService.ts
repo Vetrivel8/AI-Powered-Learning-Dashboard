@@ -6,11 +6,11 @@ import { OnboardingFormData, IntegratedPlan, MicroLessonFormData, QuizFormData, 
 // --- AI Client Factory ---
 const getAiClient = (): GoogleGenAI => {
     // This check runs on every call to ensure the key is available.
-    if (typeof process === 'undefined' || !process.env.API_KEY || process.env.API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
+    if (typeof process === 'undefined' || !process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'YOUR_GEMINI_GEMINI_API_KEY_HERE') {
         throw new Error("GEMINI API KEY IS MISSING. Please create an `env.js` file with your Google Gemini API key. Check the README.md for instructions. Note: This application does not use Firebase.");
     }
     // Always return a new instance to prevent state issues between API calls.
-    return new GoogleGenAI({ apiKey: process.env.API_KEY });
+    return new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 };
 
 
@@ -41,9 +41,9 @@ const handleGeminiError = (error: unknown, context: string): never => {
         const message = (errorBody.error?.message || errorBody.message || '').toString();
         const status = (errorBody.error?.status || '').toString();
 
-        if (message.includes("API_KEY_INVALID") || message.includes("API key not valid")) {
+        if (message.includes("GEMINI_API_KEY_INVALID") || message.includes("API key not valid")) {
             errorMessage = "Your Gemini API key is not valid. Please ensure it's correct in your `env.js` file and that the Gemini API is enabled for it in your Google Cloud project.";
-        } else if (message.includes("API_KEY IS MISSING") || message.includes("API_KEY is not configured")) {
+        } else if (message.includes("GEMINI_API_KEY IS MISSING") || message.includes("GEMINI_API_KEY is not configured")) {
             errorMessage = message; // Use the specific message from getAiClient
         } else if (message.includes("RESOURCE_EXHAUSTED") || status.includes("RESOURCE_EXHAUSTED")) {
             errorMessage = "You have exceeded your API quota. Please check your plan and billing details in your Google Cloud project. For more information, visit https://ai.google.dev/gemini-api/docs/rate-limits.";
